@@ -1,7 +1,8 @@
 const express = require("express");
-
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 const { initializeDatabase } = require("./db/db.connect");
@@ -321,12 +322,10 @@ app.delete("/books/:bookId", async (req, res) => {
   try {
     const deletedBook = await deleteBookById(req.params.bookId);
     if (deletedBook) {
-      res
-        .status(200)
-        .json({
-          message: "Book deleted successfully.",
-          deletedBook: deletedBook,
-        });
+      res.status(200).json({
+        message: "Book deleted successfully.",
+        deletedBook: deletedBook,
+      });
     } else {
       res.status(404).json({ error: "Book not found." });
     }
@@ -339,5 +338,3 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
-
-//res.status(200).json({ message: "Book Deleted Successfully.", deletedBook });
