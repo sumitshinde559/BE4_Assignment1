@@ -40,7 +40,6 @@ const bookSchema = new mongoose.Schema(
     },
     country: {
       type: String,
-      default: "United States",
     },
     rating: {
       type: Number,
